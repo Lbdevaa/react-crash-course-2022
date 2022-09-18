@@ -12,7 +12,7 @@ export default function Product({ product }: ProductProps) {
   const btnClasses = ['py-2 px-4 border bg-yellow', btnBgClassName]
 
   return (
-    <div className='border p-2'>
+    <div className='border p-2 mb-2'>
       <img src={product.image} alt={product.title} className="w-1/6" />
       <p>
         {product.title}
