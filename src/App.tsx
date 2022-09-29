@@ -1,18 +1,22 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { CreateProduct } from './components/CreateProduct';
 import { ErrorMessage } from './components/ErrorMessage';
 import { Loader } from './components/Loader';
 import Modal from './components/Modal';
 import Product from './components/Product'
+import { ModalContext } from './context/ModalContext';
 import { useProducts } from './hooks/products';
 import { IProduct } from './models';
 
 function App() {
   const { loading, error, products, addProduct } = useProducts()
-  const [modal, setModal] = useState(true)
+  // const [modal, setModal] = useState(true)
+
+  const { modal, open: openModal, close: closeModal } = useContext(ModalContext)
 
   const createHandler = (product: IProduct) => {
-    setModal(false)
+    // setModal(false)
+    closeModal()
     addProduct(product)
   }
 
@@ -24,11 +28,20 @@ function App() {
       {/* {products.map((product, index) => <Product product={product} key={index} />)} */}
       {/* <Product product={products[0]} />
       <Product product={products[1]} /> */}
-      {modal && <Modal title='Create new product' onClose={() => setModal(false)}>
+      {modal && <Modal title='Create new product'
+        onClose={() => {
+          // setModal(false)
+          closeModal()
+        }
+        }>
         <CreateProduct onCreate={createHandler} />
       </Modal>}
       <button className='fixed bottom-5 right-5 rounded-full bg-red-700 text-white text-2xl px-4 py-2'
-        onClick={() => setModal(true)}
+        onClick={() => {
+          openModal()
+          // setModal(true)
+        }
+        }
       >+</button>
     </div >
   )
