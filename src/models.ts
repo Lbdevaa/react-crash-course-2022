@@ -1,7 +1,7 @@
 // interface - ни во что не конверитруется с точки зрения js
 // описывает типы объектов
 export interface IProduct {
-  id: number
+  id?: number
   title: string
   price: number
   description: string
